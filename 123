@@ -1,0 +1,64 @@
+#include <iostream>
+#include <math.h>
+#include <stdlib.h>
+using namespace std;
+void progressia(int array[], int size, int p, int raz)
+{
+	array[0] = p;
+	for (int i = 0; i < size; i++)
+	{
+		array[i] = p + i * raz;
+	}
+}
+void rand_array(int array[], int size)
+{
+	int a,b;
+	for (int i = 0; i < size; i++)
+	{
+		array[i] = i;
+	}
+	for (int i = 1; i < size; i++)
+	{
+		a = rand() % size;
+		
+		if (array[i] == i)
+		{
+			b = array[i];
+			array[i] = array[a];
+			array[a] = b;
+		}
+	}
+}
+void rand_array_2(int array[], int size,int k=0)
+{
+	setlocale(LC_ALL, "Rus");
+	for (int i = 0; i < size; i++)
+	{
+		array[i] = 1000+rand() % 1001;
+		if (array[i] % 100 / 10 % 2 == 0) { k += 1; }
+	}
+	cout << "число элементов, у которых вторая с конца цифра – чётная = "<<k << endl;
+}
+void print_array(int array[], const int size)
+{
+	for (int i = 0; i < size; i++)
+	{
+		cout << array[i] << " ";
+	}
+	cout << endl;
+}
+int main()
+{
+	const int size = 10;
+	
+	int  p, raz;
+	cin >> p >> raz;
+	int* array = new int[size];
+	progressia(array, size, p, raz);
+	print_array(array, size);
+	rand_array(array, size);
+	print_array(array, size);
+	rand_array_2(array, size);
+	print_array(array, size);
+	delete[] array;
+}
